@@ -1,6 +1,7 @@
 <?php
 
 function login($username, $password, $ip){
+
     $pdo = Database::getInstance()->getConnection();
     //Check existence
     $check_exist_query = 'SELECT COUNT(*) FROM tbl_user WHERE user_name= :username';
@@ -12,6 +13,7 @@ function login($username, $password, $ip){
     );
 
     if($user_set->fetchColumn()>0){
+        
         //User exists
         $get_user_query = 'SELECT * FROM tbl_user WHERE user_name = :username';
         $get_user_query .= ' AND user_pass = :password';
@@ -26,7 +28,7 @@ function login($username, $password, $ip){
       while($found_user = $user_check->fetch(PDO::FETCH_ASSOC)){
           $id = $found_user['user_id'];
           //Logged In!
-          $message = 'You logged in, bitch';
+          $message = 'You logged in';
 
           
           $update_query = 'UPDATE tbl_user SET user_ip = :ip WHERE user_id = :id';
@@ -41,18 +43,23 @@ function login($username, $password, $ip){
 
       if(isset($id)){
           redirect_to('admin/welcome.php');
-      }
+      } 
 
         //user login
     }else{
+   
+    $_SESSION["login-attempts"] += 1;
 
+        
+    
     //user does not exist
-    $message = 'who the fuck are you. user does not exist';
+    $message = 'user does not exist';
     }
 
     //log user in
 
-    return $message;
+    return $message; 
+    
 
 
 }

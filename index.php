@@ -2,6 +2,12 @@
 <?php
     require_once 'load.php';
 
+    session_start();
+
+    $_SESSION["login-attempts"] = 0;
+
+    
+
     $ip = $_SERVER['REMOTE_ADDR'];
 
     if(isset($_POST['submit'])){
@@ -11,10 +17,16 @@
         if(!empty($username) && !empty($password)){
             //log user in
             $message = login($username, $password, $ip);
+            echo $_SESSION["login-attempts"];
         }else{
             $message = 'Please fill out the required field';
+            
         }
+
+        
     }
+    
+    
 ?>
 <!DOCTYPE html>
 <html lang="en">
