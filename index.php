@@ -4,26 +4,31 @@
 
     session_start();
 
-    $_SESSION["login-attempts"] = 0;
-
-    
-
     $ip = $_SERVER['REMOTE_ADDR'];
 
     if(isset($_POST['submit'])){
         $username = trim($_POST['username']);
-        $password = trim($_POST['password']);
+        $password = trim($_POST['password']); 
+
 
         if(!empty($username) && !empty($password)){
             //log user in
             $message = login($username, $password, $ip);
-            echo $_SESSION["login-attempts"];
-        }else{
+            
+            
+        } elseif(!isset($_SESSION["login-attempts"])) {
+            $_SESSION["login-attempts"] = 1;
+        }
+        
+        else{        
+
+            $_SESSION["login-attempts"] += 1;
             $message = 'Please fill out the required field';
             
         }
 
-        
+      
+    echo $_SESSION["login-attempts"];
     }
     
     

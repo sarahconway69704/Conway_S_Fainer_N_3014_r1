@@ -1,6 +1,7 @@
 <?php
 
 function login($username, $password, $ip){
+    $login_attempts = 0;
 
     $pdo = Database::getInstance()->getConnection();
     //Check existence
@@ -47,9 +48,6 @@ function login($username, $password, $ip){
 
         //user login
     }else{
-   
-    $_SESSION["login-attempts"] += 1;
-
         
     
     //user does not exist
