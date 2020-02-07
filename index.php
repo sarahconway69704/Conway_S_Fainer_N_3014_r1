@@ -9,26 +9,16 @@
     if(isset($_POST['submit'])){
         $username = trim($_POST['username']);
         $password = trim($_POST['password']); 
-
-
+        
         if(!empty($username) && !empty($password)){
             //log user in
-            $message = login($username, $password, $ip);
+            $message = login($username, $password, $ip);    
+        } else {
+            $_SESSION["login-attempts"] = 0 ;
             
-            
-        } elseif(!isset($_SESSION["login-attempts"])) {
-            $_SESSION["login-attempts"] = 1;
         }
         
-        else{        
-
-            $_SESSION["login-attempts"] += 1;
-            $message = 'Please fill out the required field';
-            
-        }
-
-      
-    echo $_SESSION["login-attempts"];
+        echo $_SESSION["login-attempts"] += 1;
     }
     
     
@@ -52,7 +42,8 @@
         <label for="">Password:</label>
         <input type="password" name="password" id="password" value="">
 
-        <button name="submit">Submit</button>
+        <button name="submit" type="submit">Login</button>
+
         
     </form>
 </body>
