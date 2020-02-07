@@ -6,6 +6,9 @@
 
     $ip = $_SERVER['REMOTE_ADDR'];
 
+    $_SESSION['login-attempts'] = 0;
+    $_SESSION['logged-in'] = 0;
+
     if(isset($_POST['submit'])){
         $username = trim($_POST['username']);
         $password = trim($_POST['password']); 
@@ -13,13 +16,10 @@
         if(!empty($username) && !empty($password)){
             //log user in
             $message = login($username, $password, $ip);    
-        } else {
-            $_SESSION["login-attempts"] = 0 ;
-            
-        }
-        
-        echo $_SESSION["login-attempts"] += 1;
+        } 
     }
+
+    echo $_SESSION['login-attempts'];
     
     
 ?>
