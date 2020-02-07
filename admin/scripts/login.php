@@ -1,7 +1,6 @@
 <?php
 
 function login($username, $password, $ip){
-    $login_attempts = 0;
 
     $pdo = Database::getInstance()->getConnection();
     //Check existence
