@@ -1,5 +1,19 @@
 <?php
     require_once '../load.php';
+    $time = time();
+    date_default_timezone_set('America/Toronto');
+
+    if ($time < "1200") {
+    echo "Hey you, good morning! Have you had a good breakfast today?";
+    } else
+
+    if ($time >= "1200" && $time < "1800") {
+    echo "Good afternoon, you sweet sunflower. Hope your day is going well!";
+    } else
+
+    if ($time >= "1800") {
+    echo "Good evening, friend. Time to kick your feet up!";
+    } 
 ?>
 
 <!DOCTYPE html>
