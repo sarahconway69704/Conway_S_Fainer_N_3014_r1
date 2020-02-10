@@ -1,6 +1,13 @@
 <?php
 
+    $_SESSION['login-attempts'] = 0;
+    $_SESSION['logged-in'] = 0;
+
+
 function login($username, $password, $ip){
+
+    $_SESSION['login-attempts'] += 1;
+    
 
     $pdo = Database::getInstance()->getConnection();
     //Check existence
@@ -12,34 +19,80 @@ function login($username, $password, $ip){
         )
     );
 
-    if ($_SESSION['login-attempts'] == 3) {
 
+
+
+    if ($_SESSION['logged-in'] == 1) {
+
+
+
+        
+        
+
+
+
+              $message = 'please wait 15 seconds';
+              
+
+              $now = date('s');
+
+              echo '......'.$now.'......';
+
+              if ($now > 15){
+      
+                  // redirect_to('blocked.php');
+                  $now = null;
+                  echo '......'.$now.'......';
+                  // unset($_SESSION['login-attempts']);
+                  // unset($_SESSION['logged-in']);
+                  $_SESSION['login-attempts'] = 0;
+                  $_SESSION['logged-in'] = 0;
+              } else {
+                  echo '......still gotta wait.....';
+              }
+              
+
+
+        
+
+
+
+        
+        // echo 'inside here 1';
+        
+    
+    } elseif ($_SESSION['login-attempts'] >= 3) {
         // lock the user out
+
         $_SESSION['logged-in'] = 1;
 
-        $now = time();
-
-        $message = 'log in attemped';
-
-        echo 'inside here 1';
-    
-    } elseif ($_SESSION['logged-in'] == 1) {
-
+        
+        $message = 'maximum log in attempts reached, please wait seconds';
         // if the user is locked out
 
-        echo 'inside here 2';
+        // echo 'inside here 2';
 
-        $message = 'please wait 30 seconds';
+        
+
+        // if ($now >= 5) {
+
+
+        //     $_SESSION['login-attempts'] = 0;
+        //     $_SESSION['logged-in'] = 0;
                 
-        if ($now >= 30) {
-            unset($_SESSION['login-attempts']);
-            unset($_SESSION['logged-in']);
-        } 
+
+        // } else {
+
+        //     echo '........you still gotta wait......';
+        // }
+
+
+
 
 
     } else {
 
-        echo 'inside here 3';
+        // echo 'inside here 3     |';
 
         if($user_set->fetchColumn()>0){
         
@@ -82,10 +135,12 @@ function login($username, $password, $ip){
         
         //user does not exist
         $message = 'user does not exist';
-        
-        echo 'inside here 4';
 
-        $_SESSION['login-attempts'] += 1;
+        
+        // echo 'inside here 4     |';
+
+        
+        
 
         }
     }

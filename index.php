@@ -1,4 +1,3 @@
-
 <?php
     require_once 'load.php';
 
@@ -6,21 +5,41 @@
 
     $ip = $_SERVER['REMOTE_ADDR'];
 
-    $_SESSION['login-attempts'] = 0;
-    $_SESSION['logged-in'] = 0;
+
+    
 
     if(isset($_POST['submit'])){
         $username = trim($_POST['username']);
         $password = trim($_POST['password']); 
+
+        
+        
+
+        
         
         if(!empty($username) && !empty($password)){
             //log user in
-            $message = login($username, $password, $ip);    
+
+            
+
+            $message = login($username, $password, $ip);
+
+
+            
+           
         } 
+
+        
+        
+
     }
 
-    echo $_SESSION['login-attempts'];
+
+
     
+    echo $_SESSION['login-attempts'];
+    echo $_SESSION['logged-in'];
+
     
 ?>
 <!DOCTYPE html>
