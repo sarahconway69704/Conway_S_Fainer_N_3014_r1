@@ -111,7 +111,7 @@ function login($username, $password, $ip){
               $id = $found_user['user_id'];
               //Logged In!
               $message = 'You logged in';
-    
+                $timeMam = 1;
               
               $update_query = 'UPDATE tbl_user SET user_ip = :ip WHERE user_id = :id';
               $update_set = $pdo->prepare($update_query);
@@ -126,6 +126,7 @@ function login($username, $password, $ip){
           if(isset($id)){
               redirect_to('admin/welcome.php');
               $_SESSION['logged-in'] = 1;
+              $_COOKIE['lastLogin'];
           } 
     
             //user login
