@@ -1,7 +1,7 @@
 <?php
 
-    $_SESSION['login-attempts'] = 0;
-    $_SESSION['logged-in'] = 0;
+$_SESSION['login-attempts'] = 0;
+$_SESSION['attempted-login'] = 0;
 
 
 function login($username, $password, $ip){
@@ -22,77 +22,32 @@ function login($username, $password, $ip){
 
 
 
-    if ($_SESSION['logged-in'] == 1) {
+    if ($_SESSION['attempted-login'] == 1) {
 
 
-
-        
-        
-
-
-
-              $message = 'please wait 15 seconds';
+        $message = 'maximum log in attempts reached, please wait 30 seconds';
               
 
-              $now = date('s');
+              $now =  substr(date("Y-m-d H:i:s"),-2);
 
-              echo '......'.$now.'......';
+              if ($now >= 30){
 
-              if ($now > 15){
-      
-                  // redirect_to('blocked.php');
-                  $now = null;
-                  echo '......'.$now.'......';
-                  // unset($_SESSION['login-attempts']);
-                  // unset($_SESSION['logged-in']);
                   $_SESSION['login-attempts'] = 0;
-                  $_SESSION['logged-in'] = 0;
-              } else {
-                  echo '......still gotta wait.....';
-              }
-              
+                  $_SESSION['attempted-login'] = 0;
+              } 
 
 
+    } elseif ($_SESSION['login-attempts'] > 2) {
+        // lock the user out 
+
+        $_SESSION['attempted-login'] = 1;
+        $_SESSION['login-attempts'] = 0;
         
-
-
-
-        
-        // echo 'inside here 1';
-        
-    
-    } elseif ($_SESSION['login-attempts'] >= 3) {
-        // lock the user out
-
-        $_SESSION['logged-in'] = 1;
-
-        
-        $message = 'maximum log in attempts reached, please wait seconds';
-        // if the user is locked out
-
-        // echo 'inside here 2';
-
-        
-
-        // if ($now >= 5) {
-
-
-        //     $_SESSION['login-attempts'] = 0;
-        //     $_SESSION['logged-in'] = 0;
-                
-
-        // } else {
-
-        //     echo '........you still gotta wait......';
-        // }
-
-
-
+        $message = 'maximum log in attempts reached, please wait 30 seconds';
 
 
     } else {
 
-        // echo 'inside here 3     |';
 
         if($user_set->fetchColumn()>0){
         
@@ -124,8 +79,9 @@ function login($username, $password, $ip){
           }
     
           if(isset($id)){
-              redirect_to('admin/welcome.php');
-              $_SESSION['logged-in'] = 1;
+            $_SESSION['login-attempts'] = 0;
+            $_SESSION['attempted-login'] = 0;
+            redirect_to('admin/welcome.php');      
           } 
     
             //user login
@@ -136,15 +92,8 @@ function login($username, $password, $ip){
         //user does not exist
         $message = 'user does not exist';
 
-        
-        // echo 'inside here 4     |';
-
-        
-        
-
         }
     }
-
 
     //log user in
 

@@ -37,8 +37,8 @@
 
 
     
-    echo $_SESSION['login-attempts'];
-    echo $_SESSION['logged-in'];
+    echo 'Number of login attempts: '.$_SESSION['login-attempts'];
+    // echo $_SESSION['logged-in'];
 
     
 ?>
@@ -48,6 +48,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="css/main.css">
     <title>Login Page</title>
 </head>
 <body>
@@ -55,11 +56,11 @@
 
     <?php echo !empty($message)? $message: ''; ?>
     <form action="index.php" method="post">
-        <label for="">Username:</label>
-        <input type="text" name="username" id="username" value="">
 
-        <label for="">Password:</label>
-        <input type="password" name="password" id="password" value="">
+        <input type="text" name="username" id="username" value="" placeholder="Username">
+
+
+        <input type="password" name="password" id="password" value="" placeholder="Password">
 
         <button name="submit" type="submit">Login</button>
 
@@ -67,3 +68,5 @@
     </form>
 </body>
 </html>
+
+
