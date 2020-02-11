@@ -1,24 +1,33 @@
 <?php
     require_once 'load.php';
 
+    // start a session once page loads
+
     session_start();
 
     $ip = $_SERVER['REMOTE_ADDR'];
 
 
+
+
     
 
     if(isset($_POST['submit'])){
+
+        // take username and pw
+        
         $username = trim($_POST['username']);
         $password = trim($_POST['password']); 
 
-        
         
 
         
         
         if(!empty($username) && !empty($password)){
-            //log user in
+            // if the user entered a username and password
+            
+            
+            //attempt to log user in
 
             
 
