@@ -49,8 +49,7 @@
     echo 'Number of login attempts: '.$_SESSION['login-attempts'];
     // echo $_SESSION['logged-in'];
 
-    
-?>
+    ?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
