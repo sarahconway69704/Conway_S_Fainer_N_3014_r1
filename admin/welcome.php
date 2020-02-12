@@ -1,5 +1,6 @@
 <?php
      require_once '../load.php';
+
      $time = time();
      date_default_timezone_set('America/Toronto');
      $now = date("H");
@@ -29,9 +30,12 @@
  
  else
  echo "Haven't seen you in a while, welcome back!";
+
+
+
  ?>
  
-?>
+
 
 <!DOCTYPE html>
 <html lang="en">

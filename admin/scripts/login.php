@@ -12,6 +12,7 @@ function login($username, $password, $ip){
 
     $_SESSION['login-attempts'] += 1;
     
+    // establish a database connection
 
     $pdo = Database::getInstance()->getConnection();
     //Check existence
@@ -93,6 +94,8 @@ function login($username, $password, $ip){
 
     
           if(isset($id)){
+
+            // record last successful login into the database
             $tm = date("Y-m-d H:i:s");
             $update_query = 'UPDATE tbl_user SET user_timestamp = :tm WHERE user_id = :id';
             $update_set = $pdo->prepare($update_query);
@@ -102,6 +105,8 @@ function login($username, $password, $ip){
                     ':tm'=> $tm
                 )
             );
+
+            //once logged in, reset all the session variables
 
             $_SESSION['login-attempts'] = 0;
             $_SESSION['attempted-login'] = 0;
