@@ -1,0 +1,8 @@
+﻿https://www.w3schools.com/php/php_sessions.asp
+https://www.php.net/manual/en/function.date-default-timezone-set.php
+https://www.php.net/manual/en/timezones.america.php
+https://www.w3schools.com/php/func_date_time.asp
+https://www.w3schools.com/php/php_cookies.asp
+https://www.w3schools.com/php/func_network_setcookie.asp
+https://www.php.net/manual/en/datetime.formats.time.php
+https://www.w3schools.com/php/php_sessions.asp
